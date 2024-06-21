@@ -51,6 +51,13 @@ namespace RichardPieterse
             return color;
         }
         
+        public static Vector3 WithXZ(this Vector3 vector, Vector3 value)
+        {
+            vector.x = value.x;
+            vector.z = value.z;
+            return vector;
+        }
+        
         public static Vector3 WithX(this Vector3 vector, float value)
         {
             vector.x = value;

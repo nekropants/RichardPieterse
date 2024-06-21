@@ -2,12 +2,13 @@ using RichardPieterse;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Arrow : MonoBehaviour
+public class Arrow : MonoGizmo
 {
     [SerializeField] private float _length = 2f;     // Height of the cone
     [SerializeField] private Color _color = Color.white;
     [SerializeField] private Material _material;
-    
+    [SerializeField]  float _radius = 1f;
+
     const  float SCALE = 1f;   
     const  float SPHERE_RADIUS = 0.02f*SCALE;   
     const  float TUBE_RADIUS = 0.01f*SCALE;
@@ -24,15 +25,44 @@ public class Arrow : MonoBehaviour
         }
     }
 
+    public Vector3 direction
+    {
+        get => transform.forward;
+        set => transform.LookAt(transform.position + value);
+    }
+
+    public Vector3 position
+    {
+        get => transform.position;
+        set => transform.position = value;
+    }
+
+    public float radius
+    {
+        get => _radius;
+        set => _radius = value;
+    }
+
     private void OnValidate()
     {
         Regenerate();
     }
 
+    public void SetMaterial(Material material)
+    {
+        if (material)
+        {
+            _material = material;
+            Regenerate();
+        }
+    }
+
     private void Regenerate()
     {
+        return;
         MeshFilter meshFilter = gameObject.GetOrAddComponent<MeshFilter>();
         MeshRenderer meshRenderer = gameObject.GetOrAddComponent<MeshRenderer>();
+        Debug.Log("Regenerate");
 
         if (_material)
         {
@@ -121,6 +151,7 @@ public class Arrow : MonoBehaviour
     
     Mesh GenerateTubeMesh()
     {
+        float tubeRadius = TUBE_RADIUS*radius;
         float tubeHeight = length;
         Mesh mesh = new Mesh();
 
@@ -132,8 +163,8 @@ public class Arrow : MonoBehaviour
         for (int i = 0; i < NUMBER_OF_SIDES; i++)
         {
             float angle = Mathf.Deg2Rad * i * angleStep;
-            float x = Mathf.Cos(angle) * TUBE_RADIUS;
-            float z = Mathf.Sin(angle) * TUBE_RADIUS;
+            float x = Mathf.Cos(angle) * tubeRadius;
+            float z = Mathf.Sin(angle) * tubeRadius;
 
             vertices[i] = new Vector3(x, tubeHeight, z);       // Top ring
             vertices[i + NUMBER_OF_SIDES] = new Vector3(x, 0, z); // Bottom ring
@@ -168,6 +199,7 @@ public class Arrow : MonoBehaviour
   
     Mesh GenerateSphereMesh()
     {
+        float sphereRadius = SPHERE_RADIUS;
         int longitudeSegments = 24; // Number of longitudinal segments
         int latitudeSegments = 16;  // Number of latitudinal segments
         Mesh mesh = new Mesh();
@@ -190,7 +222,7 @@ public class Arrow : MonoBehaviour
                 float x = cosPhi * sinTheta;
                 float y = cosTheta;
                 float z = sinPhi * sinTheta;
-                vertices[lat * (longitudeSegments + 1) + lon] = new Vector3(x, y, z) * SPHERE_RADIUS;
+                vertices[lat * (longitudeSegments + 1) + lon] = new Vector3(x, y, z) * sphereRadius;
                 uv[lat * (longitudeSegments + 1) + lon] = new Vector2((float)lon / longitudeSegments, (float)lat / latitudeSegments);
             }
         }

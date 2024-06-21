@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3117038621587313325}
   - component: {fileID: 5670093435348950307}
   m_Layer: 0
-  m_Name: Prefab_Arrow
+  m_Name: Gizmo_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,9 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9293c529cbe4319afe65799ec8b7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createdBy: {fileID: 0}
+  _scale: 1
   _length: 2
   _color: {r: 1, g: 1, b: 1, a: 1}
   _material: {fileID: 2100000, guid: e97f195ea9c434aa997998b6652b1d07, type: 2}
+  _radius: 1
 --- !u!33 &3117038621587313325
 MeshFilter:
   m_ObjectHideFlags: 0

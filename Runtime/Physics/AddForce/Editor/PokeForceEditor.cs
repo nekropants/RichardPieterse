@@ -1,11 +1,10 @@
-using UnityEditor;
 using RichardPieterse.Editor;
+using UnityEditor;
 using UnityEngine;
 
-
 [CanEditMultipleObjects]
-[CustomEditor(typeof(AddForce))]
-public class AddForceEditor : CustomEditorBase<AddForce>
+[CustomEditor(typeof(PokeForce))]
+public class PokeForceEditor : CustomEditorBase<PokeForce>
 {
     public override void OnInspectorGUI()
     {
@@ -15,11 +14,10 @@ public class AddForceEditor : CustomEditorBase<AddForce>
         if (GUILayout.Button("Apply Impulse"))
         {
             
-            foreach (AddForce addForce in targetObjects)
+            foreach (PokeForce addForce in targetObjects)
             {
-                addForce.ApplyForce();
+                addForce.Poke();
             }
         }
     }
-    
 }
