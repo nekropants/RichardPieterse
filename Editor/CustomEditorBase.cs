@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEditor;
 
-namespace RichardPieterse.Editor
+namespace RichardPieterse
 {
     public abstract class CustomEditorBase<T> : UnityEditor.Editor where T : Object
     {

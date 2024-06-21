@@ -1,7 +1,6 @@
 namespace RichardPieterse
 {
     using UnityEditor;
-    using RichardPieterse.Editor;
     using UnityEngine;
     
     

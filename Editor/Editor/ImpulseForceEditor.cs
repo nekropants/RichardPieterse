@@ -1,12 +1,12 @@
+using UnityEditor;
+using UnityEngine;
+
 namespace RichardPieterse
 {
-    using RichardPieterse.Editor;
-    using UnityEditor;
-    using UnityEngine;
-    
+  
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(PokeForce))]
-    public class PokeForceEditor : CustomEditorBase<PokeForce>
+    [CustomEditor(typeof(ImpulseForce))]
+    public class ImpulseForceEditor : CustomEditorBase<ImpulseForce>
     {
         public override void OnInspectorGUI()
         {
@@ -16,9 +16,9 @@ namespace RichardPieterse
             if (GUILayout.Button("Apply Impulse"))
             {
                 
-                foreach (PokeForce addForce in targetObjects)
+                foreach (ImpulseForce addForce in targetObjects)
                 {
-                    addForce.Poke();
+                    addForce.ApplyForce();
                 }
             }
         }
