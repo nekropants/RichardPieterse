@@ -1,19 +1,22 @@
-using UnityEngine;
-
-[ExecuteInEditMode]
-public class ImpulseForce : AddForceBase
+namespace RichardPieterse
 {
-
-    [SerializeField] private bool _disableOnTrigger;
-    public void ApplyForce()
+    using UnityEngine;
+    
+    [ExecuteInEditMode]
+    public class ImpulseForce : AddForceBase
     {
-        if (_rigidbody)
+    
+        [SerializeField] private bool _disableOnTrigger;
+        public void ApplyForce()
         {
-            _rigidbody.AddForceAtPosition(force*_multiplier*lerp, transform.position, ForceMode.Impulse);
-
-            if (_disableOnTrigger)
+            if (_rigidbody)
             {
-                gameObject.SetActive(false);
+                _rigidbody.AddForceAtPosition(force*_multiplier*lerp, transform.position, ForceMode.Impulse);
+    
+                if (_disableOnTrigger)
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
     }

@@ -1,11 +1,14 @@
-﻿using UnityEditor;
-using UnityEngine;
-
-[CustomPropertyDrawer(typeof(SceneReference))]
-public class SceneReferenceDrawer : PropertyDrawer
+namespace RichardPieterse
 {
-    public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
+    using UnityEditor;
+    using UnityEngine;
+    
+    [CustomPropertyDrawer(typeof(SceneReference))]
+    public class SceneReferenceDrawer : PropertyDrawer
     {
-        EditorGUI.PropertyField(rect, property.FindPropertyRelative("_sceneAsset"), label);
+        public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.PropertyField(rect, property.FindPropertyRelative("_sceneAsset"), label);
+        }
     }
 }

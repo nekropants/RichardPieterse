@@ -1,23 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-
-public static class AddMeshColliders 
+namespace RichardPieterse
 {
-    [MenuItem("CONTEXT/Transform/Add Mesh Colliders To Children")]
-    static void AddMeshCollidersToChildren(MenuCommand command)
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEditor;
+    using UnityEngine;
+    
+    public static class AddMeshColliders 
     {
-        Component component = command.context as Component;
-        MeshFilter[] componentsInChildren = component.gameObject.GetComponentsInChildren<MeshFilter>();
-        foreach (var filter in componentsInChildren)
+        [MenuItem("CONTEXT/Transform/Add Mesh Colliders To Children")]
+        static void AddMeshCollidersToChildren(MenuCommand command)
         {
-            MeshCollider meshCollider = filter.GetComponent<MeshCollider>();
-            if (meshCollider)
+            Component component = command.context as Component;
+            MeshFilter[] componentsInChildren = component.gameObject.GetComponentsInChildren<MeshFilter>();
+            foreach (var filter in componentsInChildren)
             {
-                GameObject.Destroy(meshCollider);
+                MeshCollider meshCollider = filter.GetComponent<MeshCollider>();
+                if (meshCollider)
+                {
+                    GameObject.Destroy(meshCollider);
+                }
+                meshCollider = filter.gameObject.AddComponent<MeshCollider>();
             }
-            meshCollider = filter.gameObject.AddComponent<MeshCollider>();
         }
     }
 }

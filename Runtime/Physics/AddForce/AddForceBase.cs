@@ -1,59 +1,62 @@
-using UnityEngine;
-
-public class AddForceBase : MonoBehaviour
+namespace RichardPieterse
 {
-    [SerializeField] protected Rigidbody _rigidbody;
-    [SerializeField] protected Vector3 _force = Vector3.forward;
-    [SerializeField] protected float _multiplier = 1f;
-    [SerializeField] protected bool _localSpace = false;
-
-    [Space]
-    [SerializeField] protected bool _drawArrow = true;
-    [SerializeField] protected float _intendedForceRange = 1;
-    [SerializeField] protected Vector3 _arrowOffset;
-    [SerializeField] protected Arrow _debugArrow;
-    private float _lerp = 1;
-
-    public Vector3 force
+    using UnityEngine;
+    
+    public class AddForceBase : MonoBehaviour
     {
-        set => _force = value;
-        get
+        [SerializeField] protected Rigidbody _rigidbody;
+        [SerializeField] protected Vector3 _force = Vector3.forward;
+        [SerializeField] protected float _multiplier = 1f;
+        [SerializeField] protected bool _localSpace = false;
+    
+        [Space]
+        [SerializeField] protected bool _drawArrow = true;
+        [SerializeField] protected float _intendedForceRange = 1;
+        [SerializeField] protected Vector3 _arrowOffset;
+        [SerializeField] protected Arrow _debugArrow;
+        private float _lerp = 1;
+    
+        public Vector3 force
         {
-            if (_localSpace)
+            set => _force = value;
+            get
             {
-                return transform.TransformDirection(_force);
+                if (_localSpace)
+                {
+                    return transform.TransformDirection(_force);
+                }
+    
+                return _force;
             }
-
-            return _force;
         }
-    }
-   
-    public float lerp
-    {
-        get => _lerp;
-        set => _lerp = value;
-    }
-
-    protected virtual void LateUpdate()
-    {
-        UpdateArrow();
-    }
-
-    private void UpdateArrow()
-    {
-        if (_debugArrow == null)
+       
+        public float lerp
         {
-            _debugArrow = GizmoUtility.CreateArrowGizmo(this);
-            _debugArrow.transform.SetParent(transform);
+            get => _lerp;
+            set => _lerp = value;
         }
-
-        if (force.magnitude != 0)
+    
+        protected virtual void LateUpdate()
         {
-            _debugArrow.transform.forward = force * Mathf.Sign(force.magnitude);
+            UpdateArrow();
         }
-        _debugArrow.length = Mathf.Abs(force.magnitude) * _multiplier / _intendedForceRange;
-        _debugArrow.transform.position = transform.position + _arrowOffset;
-
-        _debugArrow.gameObject.SetActive(_drawArrow);
+    
+        private void UpdateArrow()
+        {
+            if (_debugArrow == null)
+            {
+                _debugArrow = GizmoUtility.CreateArrowGizmo(this);
+                _debugArrow.transform.SetParent(transform);
+            }
+    
+            if (force.magnitude != 0)
+            {
+                _debugArrow.transform.forward = force * Mathf.Sign(force.magnitude);
+            }
+            _debugArrow.length = Mathf.Abs(force.magnitude) * _multiplier / _intendedForceRange;
+            _debugArrow.transform.position = transform.position + _arrowOffset;
+    
+            _debugArrow.gameObject.SetActive(_drawArrow);
+        }
     }
 }

@@ -1,22 +1,25 @@
-using RichardPieterse.Editor;
-using UnityEditor;
-using UnityEngine;
-
-[CanEditMultipleObjects]
-[CustomEditor(typeof(PokeForce))]
-public class PokeForceEditor : CustomEditorBase<PokeForce>
+namespace RichardPieterse
 {
-    public override void OnInspectorGUI()
+    using RichardPieterse.Editor;
+    using UnityEditor;
+    using UnityEngine;
+    
+    [CanEditMultipleObjects]
+    [CustomEditor(typeof(PokeForce))]
+    public class PokeForceEditor : CustomEditorBase<PokeForce>
     {
-        base.OnInspectorGUI();
-
-        GUI.enabled = Application.isPlaying;
-        if (GUILayout.Button("Apply Impulse"))
+        public override void OnInspectorGUI()
         {
-            
-            foreach (PokeForce addForce in targetObjects)
+            base.OnInspectorGUI();
+    
+            GUI.enabled = Application.isPlaying;
+            if (GUILayout.Button("Apply Impulse"))
             {
-                addForce.Poke();
+                
+                foreach (PokeForce addForce in targetObjects)
+                {
+                    addForce.Poke();
+                }
             }
         }
     }

@@ -43,7 +43,7 @@ namespace RichardsTools
     
     public class GroupWindow : EditorWindow
     {
-        private static string _groupName = "_group";
+        private static string _groupName = "Editor";
         private bool focused;
         
         private void Awake()

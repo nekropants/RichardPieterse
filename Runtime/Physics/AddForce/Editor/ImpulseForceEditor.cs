@@ -1,23 +1,26 @@
-using UnityEditor;
-using RichardPieterse.Editor;
-using UnityEngine;
-
-
-[CanEditMultipleObjects]
-[CustomEditor(typeof(ImpulseForce))]
-public class ImpulseForceEditor : CustomEditorBase<ImpulseForce>
+namespace RichardPieterse
 {
-    public override void OnInspectorGUI()
+    using UnityEditor;
+    using RichardPieterse.Editor;
+    using UnityEngine;
+    
+    
+    [CanEditMultipleObjects]
+    [CustomEditor(typeof(ImpulseForce))]
+    public class ImpulseForceEditor : CustomEditorBase<ImpulseForce>
     {
-        base.OnInspectorGUI();
-
-        GUI.enabled = Application.isPlaying;
-        if (GUILayout.Button("Apply Impulse"))
+        public override void OnInspectorGUI()
         {
-            
-            foreach (ImpulseForce addForce in targetObjects)
+            base.OnInspectorGUI();
+    
+            GUI.enabled = Application.isPlaying;
+            if (GUILayout.Button("Apply Impulse"))
             {
-                addForce.ApplyForce();
+                
+                foreach (ImpulseForce addForce in targetObjects)
+                {
+                    addForce.ApplyForce();
+                }
             }
         }
     }
