@@ -6,6 +6,42 @@ namespace RichardPieterse
 {
     public static class Extensions
     {
+        
+        public static Vector3 MultiplyComponentWise(this Vector3 vector, Vector3 operand)
+        {
+            return new Vector3(vector.x * operand.x, vector.y * operand.y, vector.z * operand.z);
+        }
+
+    public static Vector3 MultiplyComponentWise(this Vector3 vector, float x, float y, float z)
+    {
+        return new Vector3(vector.x * x, vector.y * y, vector.z * z);
+    }
+
+    public static Vector2 MultiplyComponentWise(this Vector2 vector, Vector2 operand)
+    {
+        return new Vector2(vector.x * operand.x, vector.y * operand.y);
+    }
+
+    public static Vector2 MultiplyComponentWise(this Vector2 vector, float x, float y)
+    {
+        return new Vector2(vector.x * x, vector.y * y);
+    }
+
+    public static Vector3 DivideComponentWise(this Vector3 vector, Vector3 operand)
+    {
+        return new Vector3(vector.x / operand.x, vector.y / operand.y, vector.z / operand.z);
+    }
+
+    public static Vector2 DivideComponentWise(this Vector2 vector, Vector2 operand)
+    {
+        return new Vector2(vector.x / operand.x, vector.y / operand.y);
+    }
+
+    public static Vector3 Rounded(this Vector3 vector)
+    {
+        return new Vector3(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y), Mathf.RoundToInt(vector.z));
+    }
+    
         public static Vector3 To(this Vector3 from, Vector3 to)
         {
             return to - from;
@@ -107,7 +143,14 @@ namespace RichardPieterse
             meshRenderer.SetPropertyBlock(propertyBlock);
         }
 
-        
+        public static void DestroyChildren(this Transform transform)
+        {
+            for (int i = transform.childCount - 1; i >= 0; i--)
+            {
+                GameObject.Destroy(transform.GetChild(i).gameObject);
+            }
+        }
+
         public static string GetHierarchyPath(this Transform transform)
         {
             string path = transform.name;

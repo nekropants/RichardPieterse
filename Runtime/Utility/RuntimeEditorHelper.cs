@@ -375,6 +375,16 @@ namespace RichardPieterse
 
                 return list;
         }
+        
+        
+
+        public static Material GetDefaultMaterial()
+        {
+#if UNITY_EDITOR
+                return AssetDatabase.GetBuiltinExtraResource<Material>("Default-Material.mat");
+#endif
+                return null;
+        }
 
         public static List<T> FindAssets<T>(string[] searchInFolders) where T : Object
         {

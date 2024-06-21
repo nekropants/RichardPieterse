@@ -5,15 +5,15 @@ using System.IO;
 namespace RichardPieterse
 {
 
-    public class NamespaceWrapperWindow : EditorWindow
+    public class NamespaceWrapperEditor : EditorWindow
     {
         private string folderPath = "Assets/Scripts";
-        private string namespaceName = "RichardPieterse";
+        private string namespaceName = "MyNamespace";
 
         [MenuItem("Tools/Namespace Wrapper")]
         public static void ShowWindow()
         {
-            GetWindow<NamespaceWrapperWindow>("Namespace Wrapper");
+            GetWindow<NamespaceWrapperEditor>("Namespace Wrapper");
         }
 
         private void OnGUI()
@@ -26,7 +26,9 @@ namespace RichardPieterse
 
             if (GUILayout.Button("Browse", GUILayout.Width(70)))
             {
-                string selectedPath = EditorUtility.OpenFolderPanel("Select Folder", folderPath, "");
+                string projectPath = Application.dataPath.Substring(0, Application.dataPath.Length - "Assets".Length);
+                string selectedPath = EditorUtility.OpenFolderPanel("Select Folder", projectPath, "");
+
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
                     if (selectedPath.StartsWith(Application.dataPath))
@@ -61,13 +63,19 @@ namespace RichardPieterse
             {
                 string[] lines = File.ReadAllLines(file);
                 bool inNamespace = false;
+                int lastUsingIndex = -1;
 
-                foreach (var line in lines)
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    if (line.Trim().StartsWith("namespace"))
+                    if (lines[i].Trim().StartsWith("namespace"))
                     {
                         inNamespace = true;
                         break;
+                    }
+
+                    if (lines[i].Trim().StartsWith("using"))
+                    {
+                        lastUsingIndex = i;
                     }
                 }
 
@@ -75,11 +83,17 @@ namespace RichardPieterse
                 {
                     using (StreamWriter writer = new StreamWriter(file))
                     {
-                        writer.WriteLine($"namespace {namespaceName}");
-                        writer.WriteLine("{");
-                        foreach (var line in lines)
+                        for (int i = 0; i <= lastUsingIndex; i++)
                         {
-                            writer.WriteLine($"    {line}");
+                            writer.WriteLine(lines[i]);
+                        }
+
+                        writer.WriteLine($"\nnamespace {namespaceName}");
+                        writer.WriteLine("{");
+
+                        for (int i = lastUsingIndex + 1; i < lines.Length; i++)
+                        {
+                            writer.WriteLine($"    {lines[i]}");
                         }
 
                         writer.WriteLine("}");
