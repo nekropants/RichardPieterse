@@ -51,6 +51,11 @@ namespace RichardPieterse
         {
             return (to + from)/2;
         }
+        
+        public static T GetRandomElement<T>(this T[] array)
+        {
+            return array[Random.Range(0, array.Length)];
+        }
 
         
         public static T GetOrAddComponent<T>(this GameObject uo) where T : Component
