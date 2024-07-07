@@ -206,36 +206,64 @@ namespace RichardPieterse
             
             if (this is Preference<bool> boolPref)
             {
-                boolPref.value = EditorGUILayout.Toggle(boolPref.value, label);
+                EditorGUI.BeginChangeCheck();
+                var newValue =  EditorGUILayout.Toggle(boolPref.value, label);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    boolPref.value = newValue;
+                }
                 return;
             }
             
             if (this is Preference<int> intPref)
             {
-                intPref.value = EditorGUILayout.IntField(intPref.value, label);
+                EditorGUI.BeginChangeCheck();
+                var newValue =  EditorGUILayout.IntField(intPref.value, label);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    intPref.value = newValue;
+                }
                 return;
             }
             
             
             if (this is Preference<float> floatPref)
             {
-                floatPref.value = EditorGUILayout.FloatField(floatPref.value, label);
+                EditorGUI.BeginChangeCheck();
+                var newValue =  EditorGUILayout.FloatField(floatPref.value, label);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    floatPref.value = newValue;
+                }
                 return;
             }
             
             
             if (this is Preference<string> stringPref)
             {
-                stringPref.value = EditorGUILayout.TextField(stringPref.value, label);
+                EditorGUI.BeginChangeCheck();
+                var newValue =  EditorGUILayout.TextField(stringPref.value, label);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    stringPref.value = newValue;
+                }
                 return;
             }
             
-            if (this is Preference<Object> objPref)
+            if (typeof(T) ==  typeof(Object))
             {
-                objPref.value = EditorGUILayout.ObjectField(label, objPref.value, typeof(Object), false);
+                EditorGUI.BeginChangeCheck();
+                var objPref = this as Preference<Object>;
+             
+                var newValue = EditorGUILayout.ObjectField(label, objPref.value, typeof(T) , false);
+                
+                if (EditorGUI.EndChangeCheck())
+                {
+                    objPref.value = newValue;
+                }
                 return;
             }
-
+            
             throw new NotImplementedException();
             
 #endif
