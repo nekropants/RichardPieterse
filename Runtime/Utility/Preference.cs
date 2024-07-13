@@ -18,7 +18,6 @@ namespace RichardPieterse
         private T _default;
         public Action<T> _onChanged;
 
-
         public Preference(string key, T defaultValue)
         {
             _key = key;
@@ -160,7 +159,6 @@ namespace RichardPieterse
                 EditorPrefs.SetString(_key, assetPath);
             }
 #endif
-
             _onChanged?.Invoke(_value);
         }
 
@@ -265,7 +263,6 @@ namespace RichardPieterse
             }
             
             throw new NotImplementedException();
-            
 #endif
         }
     }
