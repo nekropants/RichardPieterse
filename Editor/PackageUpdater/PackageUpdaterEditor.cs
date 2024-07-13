@@ -33,7 +33,6 @@ namespace RichardPieterse
 
         public override void OnInspectorGUI()
         {
-            GUI.enabled = true;
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("_packageName"));
             
@@ -56,6 +55,8 @@ namespace RichardPieterse
             GUILayout.Label("Status: " + _packageStatus);
             GUILayout.Label("Version: " + _version);
             GUILayout.Space(10);
+
+            GUI.enabled = true;
 
             GUILayout.BeginHorizontal();
 
