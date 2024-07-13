@@ -1,12 +1,12 @@
 {
-  "name": "com.nekropants.framework",
-  "version": "1.0.0",
-  "displayName": "Richard Pieterse",
-  "description": "Reusable code for rapid prototyping",
-  "unity": "2020.3",
-  "author": {
-    "name": "Richard Pieterse",
-    "email": "your.email@yourcompany.com",
-    "url": "https://yourcompany.com"
-  }
+    "name": "com.nekropants.framework",
+    "version": "1.0.1",
+    "displayName": "Richard Pieterse",
+    "description": "Reusable code for rapid prototyping",
+    "unity": "2020.3",
+    "author": {
+        "name": "Richard Pieterse",
+        "email": "your.email@yourcompany.com",
+        "url": "https://yourcompany.com"
+    }
 }
