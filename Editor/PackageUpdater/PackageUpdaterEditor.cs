@@ -33,7 +33,8 @@ namespace RichardPieterse
 
         public override void OnInspectorGUI()
         {
-            
+            GUI.enabled = true;
+
             EditorGUILayout.PropertyField(serializedObject.FindProperty("_packageName"));
             
             GUILayout.BeginHorizontal();
@@ -89,7 +90,6 @@ namespace RichardPieterse
             {
                 PublishNewVersion();
             }
-            GUI.enabled = true;
 
             GUILayout.EndHorizontal();
         }
