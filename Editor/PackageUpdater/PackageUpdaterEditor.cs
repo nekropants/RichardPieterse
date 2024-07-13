@@ -60,13 +60,6 @@ namespace RichardPieterse
 
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("Refresh Status"))
-            {
-                CheckPackageStatus();
-            }
-            
-            GUILayout.Space(10);
-
             if (GUILayout.Button("Switch to Local"))
             {
                 targetPackagePath = targetObject.localPackagePath;
@@ -79,6 +72,13 @@ namespace RichardPieterse
                 SwitchToPackage();
             }
 
+            GUILayout.Space(10);
+
+            if (GUILayout.Button("Refresh Status"))
+            {
+                CheckPackageStatus();
+            }
+            
             GUILayout.Space(10);
 
             GUI.enabled = _packageStatus == PackageStatus.Local;
