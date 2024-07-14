@@ -8,7 +8,7 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
     namespace RichardPieterse
 {
-    [CreateAssetMenu(fileName = "PackageUpdater", menuName = MenuPaths.TOOLS + "RichardPieterse/PackageUpdater")]
+    [CreateAssetMenu(fileName = "PackageUpdater", menuName = MenuPaths.CREATE_MENU + "/PackageUpdater")]
     public class PackageUpdater : ScriptableObject
     {
         

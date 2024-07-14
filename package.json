@@ -1,6 +1,6 @@
 {
     "name": "com.nekropants.framework",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "displayName": "Richard Pieterse",
     "description": "Reusable code for rapid prototyping",
     "unity": "2020.3",
