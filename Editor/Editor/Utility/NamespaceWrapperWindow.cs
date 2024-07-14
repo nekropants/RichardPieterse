@@ -10,7 +10,7 @@ namespace RichardPieterse
         private string folderPath = "Assets/Scripts";
         private string namespaceName = "MyNamespace";
 
-        [MenuItem("Tools/Namespace Wrapper")]
+        [MenuItem( MenuPaths.TOOLS + "/Namespace Wrapper")]
         public static void ShowWindow()
         {
             GetWindow<NamespaceWrapperEditor>("Namespace Wrapper");
