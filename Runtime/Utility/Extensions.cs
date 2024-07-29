@@ -281,7 +281,57 @@ namespace RichardPieterse
             }
 
         }
+        
+        public static List<Rigidbody> GetRigidbodies(this List<Collider> colliders)
+        {
+            return GetUniqueComponentsInParents<Rigidbody>(colliders);
+        }
+        
+        public static List<T> GetUniqueComponentsInParents<T>(this List<Collider> colliders) where T : Component
+        {
+            List<T> uniqueComponents = new List<T>();
 
+            foreach (Collider col in colliders)
+            {
+                T componentInParent = col.GetComponentInParent<T>();
+
+                if (componentInParent != null)
+                {
+                    uniqueComponents.AddIfNotContained(componentInParent);
+                }
+            }
+
+            return uniqueComponents;
+        } 
+        public static List<T> GetComponentsInChildren<T>(this List<T> components) where T : Component
+        {
+            List<T> uniqueComponents = new List<T>();
+
+            foreach (T col in components)
+            {
+                T[] componentsInChildren = col.GetComponentsInChildren<T>();
+
+                uniqueComponents.AddRange(componentsInChildren);
+            }
+
+            return uniqueComponents;
+        }
+        
+        public static bool IsDescendentOfTransform(this Transform transform, Transform parent)
+        {
+            while (transform != null)
+            {
+                if (transform == parent)
+                {
+                    return true;
+                }
+
+                transform = transform.parent;
+            }
+
+            return false;
+        }
+        
         public static void RemoveIfContained<T1, T2>(this Dictionary<T1, List<T2>> dictionary, T1 key, T2 value)
         {
             if (dictionary.ContainsKey(key))

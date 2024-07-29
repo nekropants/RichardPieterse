@@ -1,25 +1,33 @@
+using RichardPieterse;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(menuName = "GenerateRopeConfiguration", fileName = "GenerateRopeConfiguration", order = 0)]
-public class GenerateRopeConfiguration : ScriptableObject
+namespace RichardPieterse
 {
-    [SerializeField] private GameObject _segment;
-    [SerializeField] private float _segmentMass = 1;
-    [SerializeField] private float _segmentDrag;
-    [SerializeField] private float _springStrength;
-    [FormerlySerializedAs("_springDrag")] [SerializeField] private float _springDamper;
-    [SerializeField] private Material[] _materials;
+    [CreateAssetMenu(menuName = MenuPaths.CREATE_MENU + "/Generate Rope Configuration",
+        fileName = "GenerateRopeConfiguration", order = 0)]
+    public class GenerateRopeConfiguration : ScriptableObject
+    {
+        [SerializeField] private GameObject _segment;
+        [SerializeField] private float _segmentMass = 1;
+        [SerializeField] private float _segmentDrag;
+        [SerializeField] private float _springStrength;
 
-    public GameObject segment => _segment;
+        [FormerlySerializedAs("_springDrag")] [SerializeField]
+        private float _springDamper;
 
-    public float segmentMass => _segmentMass;
+        [SerializeField] private Material[] _materials;
 
-    public float segmentDrag => _segmentDrag;
+        public GameObject segment => _segment;
 
-    public float springStrength => _springStrength;
+        public float segmentMass => _segmentMass;
 
-    public float springDamper => _springDamper;
+        public float segmentDrag => _segmentDrag;
 
-    public Material[] materials => _materials;
+        public float springStrength => _springStrength;
+
+        public float springDamper => _springDamper;
+
+        public Material[] materials => _materials;
+    }
 }

@@ -62,44 +62,44 @@ namespace RichardPieterse
         private void Regenerate()
         {
             return;
-            MeshFilter meshFilter = gameObject.GetOrAddComponent<MeshFilter>();
-            MeshRenderer meshRenderer = gameObject.GetOrAddComponent<MeshRenderer>();
-            Debug.Log("Regenerate");
-    
-            if (_material)
-            {
-                meshRenderer.sharedMaterial = _material;
-            }
-            else if (meshRenderer.sharedMaterial == null)
-            {
-                meshRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
-                meshRenderer.material.name = "ArrowMaterial";
-            }
-    
-            Matrix4x4 rotateToFaceZ = Matrix4x4.Rotate(Quaternion.Euler(90, 0, 0));
-    
-            CombineInstance[] combine = new CombineInstance[3];
-    
-            combine[0].mesh = GenerateConeMesh();
-            combine[1].mesh = GenerateTubeMesh();
-            combine[2].mesh = GenerateSphereMesh();
-    
-            combine[0].transform = rotateToFaceZ * Matrix4x4.Translate(Vector3.up * length);
-            combine[1].transform = rotateToFaceZ * Matrix4x4.identity;
-            combine[2].transform = rotateToFaceZ * Matrix4x4.identity;
-    
-            Mesh combinedMesh = new Mesh();
-            combinedMesh.name = "ArrowMesh";
-            combinedMesh.CombineMeshes(combine);
-            meshFilter.mesh = combinedMesh;
-    
-            if (_material == null)
-            {
-                MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
-                meshRenderer.GetPropertyBlock(propertyBlock);
-                propertyBlock.SetColor("_BaseColor", _color);
-                meshRenderer.SetPropertyBlock(propertyBlock);
-            }
+            // MeshFilter meshFilter = gameObject.GetOrAddComponent<MeshFilter>();
+            // MeshRenderer meshRenderer = gameObject.GetOrAddComponent<MeshRenderer>();
+            // Debug.Log("Regenerate");
+            //
+            // if (_material)
+            // {
+            //     meshRenderer.sharedMaterial = _material;
+            // }
+            // else if (meshRenderer.sharedMaterial == null)
+            // {
+            //     meshRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+            //     meshRenderer.material.name = "ArrowMaterial";
+            // }
+            //
+            // Matrix4x4 rotateToFaceZ = Matrix4x4.Rotate(Quaternion.Euler(90, 0, 0));
+            //
+            // CombineInstance[] combine = new CombineInstance[3];
+            //
+            // combine[0].mesh = GenerateConeMesh();
+            // combine[1].mesh = GenerateTubeMesh();
+            // combine[2].mesh = GenerateSphereMesh();
+            //
+            // combine[0].transform = rotateToFaceZ * Matrix4x4.Translate(Vector3.up * length);
+            // combine[1].transform = rotateToFaceZ * Matrix4x4.identity;
+            // combine[2].transform = rotateToFaceZ * Matrix4x4.identity;
+            //
+            // Mesh combinedMesh = new Mesh();
+            // combinedMesh.name = "ArrowMesh";
+            // combinedMesh.CombineMeshes(combine);
+            // meshFilter.mesh = combinedMesh;
+            //
+            // if (_material == null)
+            // {
+            //     MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+            //     meshRenderer.GetPropertyBlock(propertyBlock);
+            //     propertyBlock.SetColor("_BaseColor", _color);
+            //     meshRenderer.SetPropertyBlock(propertyBlock);
+            // }
         }
     
         Mesh GenerateConeMesh()

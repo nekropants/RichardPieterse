@@ -1,6 +1,6 @@
 {
     "name": "Editor",
-    "rootNamespace": "",
+    "rootNamespace": "RichardPieterse",
     "references": [
         "GUID:0d246c2fba83e4756a61d406268995d1"
     ],

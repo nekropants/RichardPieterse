@@ -45,12 +45,11 @@ namespace RichardPieterse
         }
         public static Arrow CreateArrowGizmo(Object createdBy = null)
         {
-            
-            Arrow _debugArrow;
-            _debugArrow = RuntimeEditorHelper.InstantiatePrefabAsset<Arrow>("Gizmo_Arrow");
-            _debugArrow.transform.SetParent(gizmoParent);
-            _debugArrow.createdBy = createdBy;
-    
+            Arrow _debugArrow = null;
+            // _debugArrow = RuntimeEditorHelper.InstantiatePrefabAsset<Arrow>("Gizmo_Arrow");
+            // _debugArrow.transform.SetParent(gizmoParent);
+            // _debugArrow.createdBy = createdBy;
+            //
             return _debugArrow;
         }
         

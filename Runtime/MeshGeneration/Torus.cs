@@ -1,10 +1,8 @@
-namespace RichardPieterse
-{
+
     using UnityEngine;
     
-    
-    using UnityEngine;
-    
+    namespace RichardPieterse
+    {
     
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class Torus : MonoBehaviour

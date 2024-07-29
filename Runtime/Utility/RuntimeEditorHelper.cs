@@ -123,6 +123,33 @@ namespace RichardPieterse
                 }
         }
 
+
+        public static bool ShouldValidatePrefabInstance(GameObject gameObject)
+        {
+
+
+
+#if UNITY_EDITOR
+
+                return !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode;
+
+
+#else
+                return IsPrefabAsset(gameObject) == false;
+#endif
+
+        }
+
+        public static bool IsPrefabAsset(GameObject gameObject)
+        {
+                if (string.IsNullOrEmpty(gameObject.scene.path))
+                {
+                        return true;
+                }
+
+                return false;
+        }
+
 #if UNITY_EDITOR
     public static List<T> FindObjectsOfType<T>() where T : Component
     {
@@ -380,10 +407,12 @@ namespace RichardPieterse
 
         public static Material GetDefaultMaterial()
         {
+                Material material = null;
 #if UNITY_EDITOR
-                return AssetDatabase.GetBuiltinExtraResource<Material>("Default-Material.mat");
+                material = AssetDatabase.GetBuiltinExtraResource<Material>("Default-Material.mat");
+
 #endif
-                return null;
+                return material;
         }
 
         public static List<T> FindAssets<T>(string[] searchInFolders) where T : Object
@@ -472,12 +501,6 @@ namespace RichardPieterse
 #endif
                 return instantiatedPrefab;
         }
-#if UNITY_EDITOR
-        public static void DelayCall( EditorApplication.CallbackFunction action)
-        {
-        }
-#endif
-            
             
 
         public static void MarkSceneDirty(GameObject gameObject)

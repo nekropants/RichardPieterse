@@ -6,8 +6,6 @@ namespace RichardPieterse
     using UnityEngine.Serialization;
     
     
-    using UnityEngine;
-    
     
     public class SuspendRigidbody : MonoBehaviour
     {

@@ -1,13 +1,13 @@
+using System;
+using System.Numerics;
+using RichardPieterse;
+using UnityEngine;
+using UnityEngine.Serialization;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
+
 namespace RichardPieterse
 {
-    using System;
-    using System.Numerics;
-    using RichardPieterse;
-    using UnityEngine;
-    using UnityEngine.Serialization;
-    using Quaternion = UnityEngine.Quaternion;
-    using Vector3 = UnityEngine.Vector3;
-    
     public class AlignAxis : MonoBehaviour
     {
         private Rigidbody _rigidbody;

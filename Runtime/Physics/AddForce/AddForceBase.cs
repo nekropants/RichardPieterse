@@ -46,6 +46,10 @@ namespace RichardPieterse
             if (_debugArrow == null)
             {
                 _debugArrow = GizmoUtility.CreateArrowGizmo(this);
+                
+                if(_debugArrow == null)
+                    return;
+                
                 _debugArrow.transform.SetParent(transform);
             }
     

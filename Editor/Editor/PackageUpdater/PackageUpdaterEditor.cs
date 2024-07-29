@@ -176,7 +176,6 @@ namespace RichardPieterse
 
         private void CheckPackageStatus()
         {
-            Debug.Log("CheckPackageStatus");
             listRequest = Client.List(true);
             EditorApplication.update += CheckPackageStatusProgress;
         }

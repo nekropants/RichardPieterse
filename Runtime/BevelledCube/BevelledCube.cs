@@ -561,7 +561,10 @@ namespace RapidPrototypingKit
         {
             if (_autoRegenerate)
             {
-                Generate();
+                if(RuntimeEditorHelper.ShouldValidatePrefabInstance(gameObject) ==false)
+                    return;
+                
+                RuntimeEditorHelper.EditorApplicationDelayCall(Generate);
             }
         }
 

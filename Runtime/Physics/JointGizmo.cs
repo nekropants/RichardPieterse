@@ -21,7 +21,6 @@ namespace RichardPieterse
     
         private void Update()
         {
-            return;
             if (_joint == null)
             {
                 _joint = GetComponent<Joint>();
@@ -34,7 +33,7 @@ namespace RichardPieterse
             }
             if (_lineGizmo == null)
             {
-                _lineGizmo = GizmoUtility.CreateLineGizmo(this);
+                // _lineGizmo = GizmoUtility.CreateLineGizmo(this);
             }
     
             Vector3 connectedAnchorPosition;
