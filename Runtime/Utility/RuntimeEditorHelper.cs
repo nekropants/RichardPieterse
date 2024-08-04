@@ -127,16 +127,17 @@ namespace RichardPieterse
         public static bool ShouldValidatePrefabInstance(GameObject gameObject)
         {
 
-
-
 #if UNITY_EDITOR
 
-                return !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode;
+                if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+                        return false;
 
 
 #else
                 return IsPrefabAsset(gameObject) == false;
 #endif
+
+                return false;
 
         }
 

@@ -217,6 +217,14 @@ namespace RichardPieterse
             }
         }
 
+        public static void Solo(this Transform transform)
+        {
+            foreach (Transform sibling in transform.parent)
+            {
+                sibling.gameObject.SetActive(sibling == transform);
+            }
+        }
+
         /// <summary>
         /// checks if the list has been initialized for the key. If not it initializes the list. Then adds the value.
         /// </summary>
@@ -364,6 +372,34 @@ namespace RichardPieterse
             }
         }
         
+
+ 		public static Transform SetLocalScaleX(this Transform transform, float x)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = x;
+            transform.localScale = scale;
+            return transform;
+        }
+
+        public static Transform SetLocalScaleY(this Transform transform, float y)
+        {
+            Vector3 scale = transform.localScale;
+            scale.y = y;
+            transform.localScale = scale;
+            return transform;
+        }
+
+        public static Transform SetLocalScaleZ(this Transform transform, float z)
+        {
+            Vector3 scale = transform.localScale;
+            scale.z = z;
+            transform.localScale = scale;
+            return transform;
+        }
+
+
+
+
         public static Transform GetPreviousSibling(this Transform transform)
         {
             if (transform.parent == null)
