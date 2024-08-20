@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEditor;
-
 namespace RichardPieterse
 {
     public abstract class CustomEditorBase<T> : UnityEditor.Editor where T : Object

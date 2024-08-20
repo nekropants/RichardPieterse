@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using RichardPieterse;
 using UnityEngine;
-  using UnityEngine;
-    using UnityEditor;
+using UnityEditor;
 
 
 namespace RichardPieterse

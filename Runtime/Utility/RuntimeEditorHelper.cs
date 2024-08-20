@@ -124,6 +124,40 @@ namespace RichardPieterse
         }
 
 
+#if UNITY_EDITOR
+        public static string GetPrimaryDirectoryForAssets<T>() where T : Object
+        {
+                List<T> findAssetsOfType = RuntimeEditorHelper.FindAssetsOfType<T>();
+                Dictionary<string, int> directoryPolpularity = new Dictionary<string, int>();
+
+                foreach (var asset in findAssetsOfType)
+                {
+                        string directoryName = Path.GetDirectoryName(AssetDatabase.GetAssetPath(asset));
+                        if (directoryPolpularity.ContainsKey(directoryName))
+                        {
+                                directoryPolpularity[directoryName] += 1;
+                        }
+                        else
+                        {
+                                directoryPolpularity.Add(directoryName, 1);
+                        }
+                }
+
+                string mostPopularDirectory = "";
+                int mostPopularDirectoryCount = 0;
+                foreach (var directory in directoryPolpularity)
+                {
+                        if (directory.Value > mostPopularDirectoryCount)
+                        {
+                                mostPopularDirectory = directory.Key;
+                                mostPopularDirectoryCount = directory.Value;
+                        }
+                }
+
+                return mostPopularDirectory;
+        }
+#endif
+
         public static bool ShouldValidatePrefabInstance(GameObject gameObject)
         {
 

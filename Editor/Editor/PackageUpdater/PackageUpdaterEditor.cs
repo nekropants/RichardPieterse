@@ -33,19 +33,25 @@ namespace RichardPieterse
 
         public override void OnInspectorGUI()
         {
+            GUI.enabled = EnableGUI();
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("_packageName"));
             
             GUILayout.BeginHorizontal();
             
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("_localFilePath"));
 
+            GUI.enabled = false;
+            EditorGUILayout.TextField("Local Path", targetObject.localFilePath);
+            GUI.enabled = true;
             if (GUILayout.Button("...", GUILayout.Width(16)))
             {
                 var packageJsonFilePath =
                     EditorUtility.OpenFilePanel("Local package.json", targetObject.localFilePath, "json");
+                
+                Debug.Log(packageJsonFilePath);
                 targetObject.localFilePath = Path.GetDirectoryName(packageJsonFilePath);
             }
+            GUI.enabled = EnableGUI();
 
             GUILayout.EndHorizontal();
             
@@ -81,7 +87,7 @@ namespace RichardPieterse
             
             GUILayout.Space(10);
 
-            GUI.enabled = _packageStatus == PackageStatus.Local;
+            GUI.enabled = EnableGUI();
             if (GUILayout.Button("Increment Version"))
             {
                 IncrementVersion();
@@ -93,6 +99,11 @@ namespace RichardPieterse
             }
 
             GUILayout.EndHorizontal();
+        }
+
+        private bool EnableGUI()
+        {
+            return _packageStatus == PackageStatus.Local;
         }
 
         private void SwitchToPackage()

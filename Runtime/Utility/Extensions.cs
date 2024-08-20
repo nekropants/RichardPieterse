@@ -59,8 +59,20 @@ namespace RichardPieterse
         {
             return array[Random.Range(0, array.Length)];
         }
-
-
+       
+        public static List<T> ExtractElementsOfType<T, T2>(this IEnumerable<T2> collection)
+        {
+            List<T> clips = new List<T>();
+            foreach (var item in collection)
+            {
+                if (item is T casted)
+                {
+                    clips.Add(casted);
+                }
+            }
+            return clips;
+        }
+        
         public static T GetOrAddComponent<T>(this GameObject uo) where T : Component
         {
             var component = uo.GetComponent<T>();

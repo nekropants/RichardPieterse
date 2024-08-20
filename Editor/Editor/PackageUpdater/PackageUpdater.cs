@@ -1,19 +1,17 @@
-    using System;
-using UnityEditor;
-using UnityEditor.PackageManager;
-using UnityEditor.PackageManager.Requests;
+using System.IO;
 using UnityEngine;
-using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 
-    namespace RichardPieterse
+namespace RichardPieterse
 {
     [CreateAssetMenu(fileName = "PackageUpdater", menuName = MenuPaths.CREATE_MENU + "/PackageUpdater")]
     public class PackageUpdater : ScriptableObject
     {
         
         [SerializeField] private string _packageName = "com.nekropants.framework";
-        [SerializeField] private string _localFilePath = "/Users/rpieterse/Documents/GitHub/RichardPieterse";
+
+        private Preference<string> _localFilePath = null;
+        // [SerializeField] private string _localFilePath = "/Users/rpieterse/Documents/GitHub/RichardPieterse";
         [SerializeField] private string _gitRepoUrl = "https://github.com/nekropants/RichardPieterse.git";
    
       
@@ -36,8 +34,28 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
          public string localFilePath
          {
-             get => _localFilePath;
-             set => _localFilePath = value;
+             get
+             {
+                 LazyInitilizeLocalFilePath();
+                 return _localFilePath.value;
+             }
+             set
+             {
+                 LazyInitilizeLocalFilePath();
+                 _localFilePath.value = value;
+             }
          }
+
+         private void LazyInitilizeLocalFilePath()
+         {
+             if (_localFilePath == null)
+             {
+                 string defaultPath =
+                     Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile),
+                         "Repositories");
+                 _localFilePath = new Preference<string>(this.name+"_localFilePath", defaultPath);
+             }
+         }
+         
     }
 }
