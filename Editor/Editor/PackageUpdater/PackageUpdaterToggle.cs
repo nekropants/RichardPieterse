@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,21 +5,26 @@ namespace RichardPieterse
 {
     public static class PackageUpdaterToolbarButton
     {
+        private static GUIContent _guiContent;
+
         [InitializeOnLoadMethod]
         private static void Initialize()
-        {
-            // UnityToolbarExtender.leftOfPlayButton.Add(OnToolbarGUI);
+        {  
+         
+             UnityToolbarExtender.farRight.Add(OnToolbarGUI);
         }
 
-        // private static void OnToolbarGUI()
-        // {
-        //     EditorGUI.BeginChangeCheck();
-        //     
-        //     if(GUILayout.Button( new GUIContent("L", "Switch to Git")))
-        //     {
-        //         Debug.Log("Switch to Git");
-        //     }
-        //     
-        // }
+        private static void OnToolbarGUI()
+        {
+            GUILayoutOption layoutWidth = GUILayout.Width( 26);
+            GUILayoutOption layoutHeight = GUILayout.Height( 19);
+            Texture texture = RuntimeEditorHelper.FindAssetByName<Texture>("Icon_ImportAudioFromDownloads");
+            _guiContent = new GUIContent(texture, "Import Audio From Downloads");
+            if(GUILayout.Button( _guiContent,layoutWidth, layoutHeight))
+            {
+                ImportAudioFromDownloads.CopyAudioFilesFromDownloadsToAssets();
+                Debug.Log("Import Audio From Downloads");
+            }
+        }
     }
 }

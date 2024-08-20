@@ -462,7 +462,7 @@ namespace RichardPieterse
                 return list;
         }
 
-        public static T FindAsset<T>(string name, bool includeTypeInSearch = true) where T : Object
+        public static T FindAssetByName<T>(string name, bool includeTypeInSearch = true) where T : Object
         {
 #if UNITY_EDITOR
                 string search = name;
@@ -525,7 +525,7 @@ namespace RichardPieterse
         {
                 T instantiatedPrefab = null;
 #if UNITY_EDITOR
-                GameObject asset = FindAsset<GameObject>(prefabName);
+                GameObject asset = FindAssetByName<GameObject>(prefabName);
                 GameObject instantiatedGO = UnityEditor.PrefabUtility.InstantiatePrefab(asset) as GameObject;
 
                 if (instantiatedGO)

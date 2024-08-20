@@ -312,7 +312,7 @@ namespace RichardPieterse
          
          private void OnToolbarGUI()
          {
-             GUILayoutOption buttonWidth = GUILayout.Width(25);
+             GUILayoutOption buttonWidth = GUILayout.Width(50);
              switch (this.packageStatus)
              {
                  case PackageStatus.Switching:
@@ -325,7 +325,7 @@ namespace RichardPieterse
                  }
                  case PackageStatus.Git:
                  {
-                     if(GUILayout.Button( new GUIContent("G", "Switch to Local"), buttonWidth))
+                     if(GUILayout.Button( new GUIContent("G → L", "Switch to Local"), buttonWidth))
                      {
                          Debug.Log("Switch to Local");
                          SwitchToLocalPackage();
@@ -334,7 +334,7 @@ namespace RichardPieterse
                  }
                  case PackageStatus.Local:
                  {
-                     if(GUILayout.Button( new GUIContent("L", "Switch to Git"), buttonWidth))
+                     if(GUILayout.Button( new GUIContent("L → G", "Switch to Git"), buttonWidth))
                      {
                          Debug.Log("Switch to Git");
                          SwitchToGitPackage();
