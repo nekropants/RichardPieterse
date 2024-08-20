@@ -53,17 +53,22 @@ namespace RichardPieterse
 
             GUILayout.BeginHorizontal();
 
+            GUI.enabled = targetObject.packageStatus == PackageUpdater.PackageStatus.Git;
+
             if (GUILayout.Button("Switch to Local"))
             {
                 targetObject.SwitchToLocalPackage();
             }
 
+            GUI.enabled = targetObject.packageStatus == PackageUpdater.PackageStatus.Local;
+            
             if (GUILayout.Button("Switch to Git"))
             {
                 targetObject.SwitchToGitPackage();
             }
 
             GUILayout.Space(10);
+
 
             if (GUILayout.Button("Refresh Status"))
             {
