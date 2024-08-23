@@ -307,7 +307,24 @@ namespace RichardPieterse
          void OnEnable()
          {
              Debug.Log("OnEnable");
+             RegisterToolbarButton();
+         }
+
+         private void RegisterToolbarButton()
+         {
+             UnityToolbarExtender.farRight.Remove(OnToolbarGUI);
              UnityToolbarExtender.farRight.Add(OnToolbarGUI);
+         }
+
+         private void Awake()
+         {
+             Debug.Log("Awake");
+         }
+         
+         void OnValidate()
+         {
+             RegisterToolbarButton();
+             Debug.Log("OnValidate");
          }
          
          private void OnToolbarGUI()
@@ -344,9 +361,6 @@ namespace RichardPieterse
              }
          }
          
-         private void Awake()
-         {
-             Debug.Log("Awake");
-         }
+        
     }
 }

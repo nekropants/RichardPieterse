@@ -1,4 +1,5 @@
 
+    using System.Collections;
     using UnityEngine;
 
     namespace RichardPieterse
@@ -7,19 +8,28 @@
         public class ImpulseForce : AddForceBase
         {
 
-            [SerializeField] private bool _disableOnTrigger;
-
+            [Space]
+            [SerializeField] private float _delay;
             public void ApplyForce()
             {
+                if (enabled == false)
+                {
+                    return;
+                }
+                
                 if (_rigidbody)
                 {
-                    _rigidbody.AddForceAtPosition(force * _multiplier * lerp, transform.position, ForceMode.Impulse);
-
-                    if (_disableOnTrigger)
-                    {
-                        gameObject.SetActive(false);
-                    }
+                    StartCoroutine(DoApplyForce());
                 }
+            }
+            
+            private IEnumerator DoApplyForce()
+            {
+                if(_delay > 0)
+                {
+                    yield return new WaitForSeconds(_delay);
+                }
+                _rigidbody.AddForceAtPosition(force * _multiplier * lerp, transform.position, ForceMode.Impulse);
             }
         }
     }
