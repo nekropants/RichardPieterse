@@ -4,14 +4,13 @@ using UnityEditor;
 
 namespace RichardPieterse
 {
-  
     public  class CreateTextureUtility
     {
         public static int textureWidth = 1024;
         public static int textureHeight = 1024;
         
 
-        [MenuItem("Assets/Create/RichardPieterse/Texture")]
+        [MenuItem( MenuPaths.QUICK_CREATE + "/Create Texture", false, MenuPaths.QUICK_CREATE_PRIORITY)]
         public static void CreateWhiteTexture(MenuCommand menuCommand)
         {
             // Get the path of the selected folder in the Project window

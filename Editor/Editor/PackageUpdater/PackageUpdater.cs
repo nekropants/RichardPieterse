@@ -306,7 +306,6 @@ namespace RichardPieterse
          
          void OnEnable()
          {
-             Debug.Log("OnEnable");
              RegisterToolbarButton();
          }
 
@@ -324,7 +323,6 @@ namespace RichardPieterse
          void OnValidate()
          {
              RegisterToolbarButton();
-             Debug.Log("OnValidate");
          }
          
          private void OnToolbarGUI()
