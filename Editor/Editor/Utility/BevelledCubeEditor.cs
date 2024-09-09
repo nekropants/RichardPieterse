@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,6 +25,11 @@ namespace RapidPrototypingKit
 
         private Vector3 pos = Vector3.zero;
         private Vector3 size = Vector3.one;
+
+        private void Awake()
+        {
+            // _cachedTool = Tools.current;
+        }
 
         public override void OnInspectorGUI()
         {
@@ -60,7 +66,7 @@ namespace RapidPrototypingKit
         {
             BevelledCube cube = (target as BevelledCube);
 
-            if (Event.current.type == EventType.KeyDown)
+            if (Event.current.type == EventType.KeyDown && Event.current.command == false)
             {
                 switch (Event.current.keyCode)
                 {
@@ -100,7 +106,7 @@ namespace RapidPrototypingKit
 
                 EditorGUI.BeginChangeCheck();
                 Handles.color = Color.red;
-                Vector3 scale = Handles.ScaleHandle(cube.size, cube.pivot, Quaternion.identity, 1);
+                Vector3 scale = Handles.ScaleHandle(cube.size, cube.pivot, Quaternion.identity, 0.5f);
 
                 if (EditorGUI.EndChangeCheck())
                 {
@@ -181,7 +187,7 @@ namespace RapidPrototypingKit
             // ----- Pivot ----
             Handles.matrix = Matrix4x4.Translate(cube.transform.position);
             Handles.color = Color.white;
-            Handles.SphereHandleCap(0, Vector3.zero, Quaternion.identity, 0.1f, EventType.Repaint);
+            // Handles.SphereHandleCap(0, Vector3.zero, Quaternion.identity, 0.1f, EventType.Repaint);
 
 
         }
