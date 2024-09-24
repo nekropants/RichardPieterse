@@ -171,9 +171,10 @@ namespace RichardPieterse
             }
         }
 
-        public static string GetHierarchyPath(this Transform transform)
+        public static string GetHierarchyPath(this Component component)
         {
-            string path = transform.name;
+            string path = component.name;
+            Transform transform = component.transform;
             while (transform.parent != null)
             {
                 transform = transform.parent;
@@ -194,6 +195,58 @@ namespace RichardPieterse
 
             return results;
         }
+
+        public static Collider[] GetOverlappingColliders(this Collider _collider)
+        {
+            if (_collider is BoxCollider boxCollider)
+            {
+                Vector3 worldCenter = boxCollider.transform.TransformPoint(boxCollider.center);
+                Vector3 worldHalfExtents = Vector3.Scale(boxCollider.size, boxCollider.transform.lossyScale) * 0.5f;
+                return Physics.OverlapBox(worldCenter, worldHalfExtents, boxCollider.transform.rotation);
+            }
+
+            if (_collider is SphereCollider sphereCollider)
+            {
+                return Physics.OverlapSphere(sphereCollider.transform.position + sphereCollider.center, sphereCollider.radius);
+            }
+            
+            if (_collider is CapsuleCollider capsuleCollider)
+            {
+                Vector3 point0 = capsuleCollider.transform.TransformPoint(capsuleCollider.center + Vector3.up * capsuleCollider.height / 2);
+                Vector3 point1 = capsuleCollider.transform.TransformPoint(capsuleCollider.center - Vector3.up * capsuleCollider.height / 2);
+                return Physics.OverlapCapsule(point0, point1, capsuleCollider.radius);
+            }
+            
+            return new Collider[0];
+        }
+        
+        public static void DrawWireGizmos(this Collider collider)
+        {
+            var cache =Gizmos.matrix;
+            Gizmos.matrix = collider.transform.localToWorldMatrix;
+            if (collider is BoxCollider boxCollider)
+            {
+                Gizmos.DrawWireCube(boxCollider.center, boxCollider.size);
+            }
+            if (collider is SphereCollider sphereCollider)
+            {
+                Gizmos.DrawWireSphere(sphereCollider.center, sphereCollider.radius);
+            }
+            if (collider is CapsuleCollider capsuleCollider)
+            {
+                Gizmos.DrawWireSphere(capsuleCollider.center + Vector3.up * capsuleCollider.height / 2, capsuleCollider.radius);
+                Gizmos.DrawWireSphere(capsuleCollider.center - Vector3.up * capsuleCollider.height / 2, capsuleCollider.radius);
+                Gizmos.DrawWireCube(capsuleCollider.center, new Vector3(capsuleCollider.radius * 2, capsuleCollider.height, capsuleCollider.radius * 2));
+            }
+            
+            Gizmos.matrix = cache;
+        }
+        
+        public static string GetFullPath(this Component component)
+        {
+            return component.transform.GetHierarchyPath() + "/" + component.GetType().Name;
+        }
+   
 
         public static bool IsVisible(this Camera camera, Vector3 point, bool raycast = false,
             int layerMaskOfBlockingObjects = 0, float margin = 0)
