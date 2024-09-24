@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Animations;
@@ -8,6 +9,67 @@ namespace RichardPieterse
 {
     public  static class EditorExtensions 
     {
+        //  [UnityEditor.MenuItem("CONTEXT/Transform/Freeze/Local Rotation")]
+        // private static void FreezeRotation(UnityEditor.MenuCommand command)
+        // {
+        //     Transform transform = (Transform) command.context;
+        //     transform.localEulerAngles = Vector3.zero;
+        //     List<Transform> children = new List<Transform>();
+        //     
+        //     Undo.RecordObject(transform,"Freeze");
+        //     foreach (Transform child in transform)
+        //     {
+        //         Undo.RecordObject(child,"Freeze");
+        //         children.Add(child);
+        //         child.SetParent(null);
+        //     }
+        //     transform.localRotation = Quaternion.identity;
+        //     foreach (Transform child in children)
+        //     {
+        //         child.SetParent(transform);
+        //     }
+        // }
+        // [UnityEditor.MenuItem("CONTEXT/Transform/Freeze/Local Scale")]
+        // private static void FreezeScale(UnityEditor.MenuCommand command)
+        // {
+        //     Transform transform = (Transform) command.context;
+        //     transform.localEulerAngles = Vector3.zero;
+        //     List<Transform> children = new List<Transform>();
+        //     Undo.RecordObject(transform,"Freeze");
+        //     foreach (Transform child in transform)
+        //     {
+        //         Undo.RecordObject(child,"Freeze");
+        //         children.Add(child);
+        //         child.SetParent(null);
+        //     }
+        //
+        //     transform.localScale = Vector3.zero;
+        //     foreach (Transform child in children)
+        //     {
+        //         child.SetParent(transform);
+        //     }
+        // }
+        //
+        // [UnityEditor.MenuItem("CONTEXT/Transform/Freeze/Local Position")]
+        // private static void FreezePosition(UnityEditor.MenuCommand command)
+        // {
+        //     Transform transform = (Transform) command.context;
+        //     transform.localEulerAngles = Vector3.zero;
+        //     List<Transform> children = new List<Transform>();
+        //     Undo.RecordObject(transform,"Freeze");
+        //     foreach (Transform child in transform)
+        //     {
+        //         Undo.RecordObject(child,"Freeze");
+        //         children.Add(child);
+        //         child.SetParent(null);
+        //     }
+        //
+        //     transform.localPosition = Vector3.zero;
+        //     foreach (Transform child in children)
+        //     {
+        //         child.SetParent(transform);
+        //     }
+        // }
        
         [MenuItem("CONTEXT/Animator/Create Controller With Empty Idle")]
         public static void CreateTwoStateAnimator(MenuCommand command)
