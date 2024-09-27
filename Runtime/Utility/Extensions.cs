@@ -12,6 +12,16 @@ namespace RichardPieterse
     
     public static class Extensions
     {
+        public static List<Transform> GetChildren(this Transform transform)
+        {
+            List<Transform> children = new List<Transform>();
+            foreach (Transform child in transform)
+            {
+                children.Add(child);
+            }
+
+            return children;
+        }
 
         public static Vector3 MultiplyComponentWise(this Vector3 vector, Vector3 operand)
         {

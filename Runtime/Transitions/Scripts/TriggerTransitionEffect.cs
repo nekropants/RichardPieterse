@@ -5,12 +5,12 @@ namespace RichardPieterse
 {
     public class TriggerTransitionEffect : MonoBehaviour
     {
-        [SerializeField] private TransitionWithAnimator _transitionPrefab;
+        [SerializeField] private TransitionWithAnimation _transitionPrefab;
 
         public void Trigger()
         {
-            TransitionWithAnimator transitionWithAnimator = _transitionPrefab.Instantiate();
-            transitionWithAnimator.DoFullTransition(null, null);
+            TransitionWithAnimation transitionWithAnimation = _transitionPrefab.Instantiate();
+            transitionWithAnimation.DoFullTransition(null, null);
         }
     }
 }

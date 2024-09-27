@@ -6,8 +6,8 @@ using UnityEngine;
 
 namespace BeyondThePines
 {
-    [CustomEditor(typeof(TransitionWithAnimator))]
-    public class TestTransitionButtonEditor : CustomEditorBase<TransitionWithAnimator>
+    [CustomEditor(typeof(TransitionWithAnimation))]
+    public class TestTransitionButtonEditor : CustomEditorBase<TransitionWithAnimation>
     {
         public override void OnInspectorGUI()
         {
@@ -17,8 +17,8 @@ namespace BeyondThePines
             {
                 if (RuntimeEditorHelper.IsPrefabAsset(targetObject.gameObject))
                 {
-                    TransitionWithAnimator transitionWithAnimator = targetObject.Instantiate();
-                    transitionWithAnimator.TestTransition();
+                    TransitionWithAnimation transitionWithAnimation = targetObject.Instantiate();
+                    transitionWithAnimation.TestTransition();
                 }
                 else
                 {

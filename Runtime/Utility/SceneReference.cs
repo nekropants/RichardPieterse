@@ -104,5 +104,31 @@ namespace RichardPieterse
         {
     
         }
+
+        // Compare Scene name 
+        public override bool Equals(object obj)
+        {
+            if (obj is SceneReference sceneReference)
+            {
+                return sceneReference.SceneName == SceneName;
+            }
+            return false;
+        }
+        
+        public override int GetHashCode()
+        {
+            return SceneName.GetHashCode();
+        }
+
+        public void Set(Scene scene)
+        {
+#if UNITY_EDITOR
+                UnityEditor.SceneAsset sceneAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(scene.path);
+            Set(sceneAsset);
+            #else
+            Debug.LogWarning("Scene Reference Set Can Only Be Invoked From Editor");
+#endif
+      
+        }
     }
 }

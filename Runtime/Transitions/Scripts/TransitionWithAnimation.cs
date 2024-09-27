@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using RichardPieterse;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace BeyondThePines
 {
-    public class TransitionWithAnimator : MonoBehaviour
+    public class TransitionWithAnimation : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private AnimationClip _inDuration;
@@ -78,11 +79,26 @@ namespace BeyondThePines
             return StartCoroutine(IEDoFullTransition(onTransitionInComplete, onTransitionOutComplete));
         }
 
-        public TransitionWithAnimator Instantiate()
+        public TransitionWithAnimation Instantiate()
         {
             GameObject newInstance = Instantiate(gameObject);
-            TransitionWithAnimator transitionFadeToBlack = newInstance.GetComponent<TransitionWithAnimator>();
+            TransitionWithAnimation transitionFadeToBlack = newInstance.GetComponent<TransitionWithAnimation>();
             return transitionFadeToBlack;
+        }
+        
+        public TransitionWithAnimation InstantiateAndDoTransition(Action onTransitionInComplete,
+            Action onTransitionOutComplete)
+        {
+            var instance = Instantiate();
+            instance.DoFullTransition(onTransitionInComplete, onTransitionOutComplete);
+            return instance;
+        }
+        
+        public TransitionWithAnimation InstantiateAndDoTransition(SceneReference loadScene)
+        {
+            var instance = Instantiate();
+            instance.DoFullTransition(() => loadScene.Load(), null);
+            return instance;
         }
     }
 }
