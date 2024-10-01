@@ -521,6 +521,27 @@ namespace RichardPieterse
                 return false;
         }
 
+        // Instantiate prefab if possible otherwise do a regular gameobject instantiate
+        public static T SmartInstantiate<T>(T gameObject) where T : MonoBehaviour
+        {
+                T instantiated = null;
+#if UNITY_EDITOR
+                        if (PrefabUtility.GetPrefabAssetType(gameObject) == PrefabAssetType.Regular)
+                        {
+                                instantiated = (T)PrefabUtility.InstantiatePrefab(gameObject);
+                        }
+                        else
+                        {
+                                instantiated = Object.Instantiate(gameObject) as T;
+                        }
+#else
+                                                instantiated = Object.Instantiate(gameObject) as T;
+
+#endif
+                return instantiated;
+
+        }
+
         public static T InstantiatePrefabAsset<T>(string prefabName, string undoName = "instantiate") where T : Object
         {
                 T instantiatedPrefab = null;

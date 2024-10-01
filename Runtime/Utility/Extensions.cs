@@ -12,6 +12,25 @@ namespace RichardPieterse
     
     public static class Extensions
     {
+        public static Vector3 RandomLocalPoint(this BoxCollider boxCollider)
+        {
+            Vector3 localPoint = new Vector3(
+                Random.Range(-boxCollider.size.x / 2, boxCollider.size.x / 2),
+                Random.Range(-boxCollider.size.y / 2, boxCollider.size.y / 2),
+                Random.Range(-boxCollider.size.z / 2, boxCollider.size.z / 2)
+            );
+            
+            localPoint += boxCollider.center;
+
+            return localPoint;
+        }
+        
+        public static Vector3 RandomWorldPoint(this BoxCollider boxCollider)
+        {
+            Vector3 localPoint = boxCollider.RandomLocalPoint();
+            return boxCollider.transform.TransformPoint(localPoint);
+        }
+
         public static List<Transform> GetChildren(this Transform transform)
         {
             List<Transform> children = new List<Transform>();

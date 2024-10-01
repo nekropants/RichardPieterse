@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using UnityEditor;
@@ -13,9 +14,7 @@ namespace RichardPieterse
     [CreateAssetMenu(fileName = "PackageUpdater", menuName = MenuPaths.CREATE_MENU + "/PackageUpdater")]
     public class PackageUpdater : ScriptableObject
     {
-        
         [SerializeField] private string _packageName = "com.nekropants.framework";
-
         private Preference<string> _localFilePath = null;
         // [SerializeField] private string _localFilePath = "/Users/rpieterse/Documents/GitHub/RichardPieterse";
         [SerializeField] private string _gitRepoUrl = "https://github.com/nekropants/RichardPieterse.git";
@@ -303,28 +302,13 @@ namespace RichardPieterse
                 process.WaitForExit();
             }
         }
-         
-         void OnEnable()
-         {
-             RegisterToolbarButton();
-         }
 
          private void RegisterToolbarButton()
          {
              UnityToolbarExtender.farRight.Remove(OnToolbarGUI);
              UnityToolbarExtender.farRight.Add(OnToolbarGUI);
          }
-
-         private void Awake()
-         {
-             Debug.Log("Awake");
-         }
-         
-         void OnValidate()
-         {
-             RegisterToolbarButton();
-         }
-         
+       
          private void OnToolbarGUI()
          {
              GUILayoutOption buttonWidth = GUILayout.Width(50);
@@ -359,6 +343,21 @@ namespace RichardPieterse
              }
          }
          
-        
+         public static class Initializer
+         {
+             [InitializeOnLoadMethod]
+             private static void InitializeOnLoad()
+             {
+                 List<PackageUpdater> packageUpdaters = RuntimeEditorHelper.FindAssetsOfType<PackageUpdater>();
+                 foreach (var updater in packageUpdaters)
+                 {
+                     updater.CheckPackageStatus();
+                     updater.RegisterToolbarButton();   
+                 }
+
+             }
+         } 
+
     }
+    
 }
